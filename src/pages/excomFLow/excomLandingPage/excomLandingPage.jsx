@@ -75,6 +75,7 @@ const ExcomLandingPage = () => {
               fname: user?.user?.firstName,
               lname: user?.user?.lastName,
               email: user?.user?.email,
+              profileImg : user?.user?.profilePic,
               contactNo: user?.user?.contactNo,
               entity: user?.ou?.ou_short_name,
               position: user?.role?.userRole,

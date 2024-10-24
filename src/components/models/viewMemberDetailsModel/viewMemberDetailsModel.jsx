@@ -23,10 +23,10 @@ const MemberDetailsModal = ({ onHide, show, memberData }) => {
       <Modal.Body>
         <div className="d-flex flex-column align-items-center">
           <img
-            src={Profile}
+            src={memberData.profileImg || Profile}
             alt="Profile"
             className="rounded-circle mb-3"
-            style={{ width: '100px', height: '100px' }}
+            style={{ width: '200px', height: '200px' }}
           />
           <div className="w-100">
           <div className="mb-3">

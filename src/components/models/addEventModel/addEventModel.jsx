@@ -4,6 +4,7 @@ import CommonButton from "../../common/commonButton/commonButton";
 import uploadImageIcon from "../../../assets/icons/upload.png";
 import { useDispatch } from "react-redux";
 import { uploadImage } from "../../../redux/actions/imageUpload";
+import { createEvent } from "../../../redux/actions/event";
 
 const AddEventModel = ({ onHide, show, disabled, editable, id }) => {
   const [image, setImage] = useState(null);
@@ -44,18 +45,26 @@ const AddEventModel = ({ onHide, show, disabled, editable, id }) => {
     }
   };
 
+
   const validateInputs = () => {
     const newErrors = {};
+
+    // Validation checks
     if (!eventName) newErrors.eventName = "Event Name is required.";
     if (!date) newErrors.date = "Date is required.";
     if (!venue) newErrors.venue = "Venue is required.";
     if (!description) newErrors.description = "Description is required.";
     if (!eventLink) newErrors.eventLink = "Event Link is required.";
-    if (!projectName) newErrors.projectName = "Project Name is required.";
+    // if (!projectName) newErrors.projectName = "Project Name is required.";
     if (!image) newErrors.image = "Event photo is required.";
+    
+    // Log errors to see what is missing
+    console.log("Validation Errors:", newErrors);
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
+};
+
 
   const handleProfileUpload = async (selectedFile) => {
     if (!selectedFile) return;
@@ -63,11 +72,45 @@ const AddEventModel = ({ onHide, show, disabled, editable, id }) => {
     return uploadedImageUrl;
   };
 
-  const handleSave = async () => {
-    if (validateInputs()) {
+
+  const clearInputs = () =>{
+    setDate("");
+    setDescription("");
+    setEventLink("");
+    setEventName("");
+    setVenue("");
+    setImage(null);
+  }
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    const isValid = validateInputs();
+    if (isValid) {
       const imgUrl = await handleProfileUpload(image);
-      onSave(imgUrl); // You can customize this based on how you want to handle data submission
-      onClose();
+
+      const eventData = {
+        eventName,
+        date,
+        venue,
+        description,
+        eventLink,
+        image: imgUrl,
+        "status": "ACTIVE",
+      };
+
+      console.log("add event data :", eventData)
+
+      dispatch(createEvent(id, eventData, (response) => {
+        console.log("add event", response)
+        if (response.status === 201) {
+          console.log("Event created successfully:", response);
+          onHide(); 
+          clearInputs();
+          window.location.reload();
+        } else {
+          console.error("Error creating event:", response);
+        }
+      }));
     }
   };
 
@@ -105,6 +148,9 @@ const AddEventModel = ({ onHide, show, disabled, editable, id }) => {
                   id="exampleFormControlInput1"
                   placeholder="event name"
                   disabled={disabled}
+                  name="eventName"
+                  value={eventName}
+                  onChange={(e) => setEventName(e.target.value)}
                 />
                 {errors.eventName && (
                   <div className="text-danger">{errors.eventName}</div>
@@ -125,6 +171,9 @@ const AddEventModel = ({ onHide, show, disabled, editable, id }) => {
                   id="exampleFormControlInput1"
                   placeholder="date"
                   disabled={disabled}
+                  name="date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
                 />
                 {errors.date && (
                   <div className="text-danger">{errors.date}</div>
@@ -145,6 +194,9 @@ const AddEventModel = ({ onHide, show, disabled, editable, id }) => {
                   id="exampleFormControlInput1"
                   placeholder="venue"
                   disabled={disabled}
+                  name="venue"
+                  value={venue}
+                  onChange={(e) => setVenue(e.target.value)}
                 />
                 {errors.venue && (
                   <div className="text-danger">{errors.venue}</div>
@@ -160,6 +212,9 @@ const AddEventModel = ({ onHide, show, disabled, editable, id }) => {
                   id="exampleFormControlTextarea1"
                   rows="3"
                   disabled={disabled}
+                  name="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
                 {errors.description && (
                   <div className="text-danger">{errors.description}</div>
@@ -176,6 +231,9 @@ const AddEventModel = ({ onHide, show, disabled, editable, id }) => {
                   id="exampleFormControlInput1"
                   placeholder="eventUrl"
                   disabled={disabled}
+                  name="eventLink"
+                  value={eventLink}
+                  onChange={(e) => setEventLink(e.target.value)}
                 />
                 {errors.eventLink && (
                   <div className="text-danger">{errors.eventLink}</div>
@@ -255,9 +313,14 @@ const AddEventModel = ({ onHide, show, disabled, editable, id }) => {
               <CommonButton onClick={handleSave} text="Save" />
             </div>
             <div>
-              <CommonButton onClick={onHide} close={true} text={"Close"} />
+              <CommonButton  onClick={() => {
+                              onHide();  
+                              clearInputs(); 
+                              }} 
+                              close={true} 
+                              text={"Close"} 
+                              />
             </div>
-          
         </Modal.Footer>
       </Modal>
     </>

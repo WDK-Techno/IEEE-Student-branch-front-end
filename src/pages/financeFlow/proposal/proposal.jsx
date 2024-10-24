@@ -20,10 +20,12 @@ const Proposal = () => {
         setPageLoading(true)
         if (userData) {
             const isFinanceAvailable = PolicyValidate(userData, "FINANCE");
-            if (!isFinanceAvailable) {
-                navigate('/dashboard')
-            } else {
+            const isFinanceBudgetAvailable = PolicyValidate(userData, "FINANCE_BUDGET_PROPOSAL");
+            if (isFinanceAvailable && isFinanceBudgetAvailable) {
                 setPageLoading(false);
+            } else {
+                navigate('/dashboard')
+
             }
         }
     }, [userData])

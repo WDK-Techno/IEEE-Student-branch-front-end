@@ -11,7 +11,6 @@ import { PolicyValidate } from '../../../utils/valitations/Valitation';
 
 
 const ReportPage = () => {
-
     const { toPDF, targetRef } = usePDF({ filename: 'report.pdf' });
     const userData = useSelector((state) => state.user.userData);
     const [pageLoading, setPageLoading] = useState(true);
@@ -21,10 +20,12 @@ const ReportPage = () => {
         setPageLoading(true)
         if (userData) {
             const isFinanceAvailable = PolicyValidate(userData, "FINANCE");
-            if (!isFinanceAvailable) {
-                navigate('/dashboard')
-            } else {
+            const isFinanceTransectionAvailable = PolicyValidate(userData, "FINANCE_TRANSACTION");
+            if (isFinanceAvailable && isFinanceTransectionAvailable) {
                 setPageLoading(false);
+            } else {
+                navigate('/dashboard')
+
             }
         }
     }, [userData])

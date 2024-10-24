@@ -13,7 +13,7 @@ const CommonTaskCard = ({ task, openTaskModal }) => {
 
   useEffect(() => {
     const array = task?.users;
-    array.push(task.createdBy)
+    // array.push(task.createdBy)
     setAssigneesArray(array)
   }, [task])
 

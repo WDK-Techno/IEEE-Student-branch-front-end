@@ -16,7 +16,7 @@ const EditProfileModal = ({
   const [image, setImage] = useState(null);
   const [error, setError] = useState(false);
   const [exist, setExist] = useState("");
-  const dispatch = useDispatch();
+
 
   useEffect(() => {
     setImage(null);
@@ -45,11 +45,7 @@ const EditProfileModal = ({
     }
   };
 
-  const handleProfileUpload = async (selectedFile) => {
-    if (!selectedFile) return;
-    const uploadedImageUrl = await dispatch(uploadImage(selectedFile));
-    return uploadedImageUrl;
-  };
+
 
   const handleSave = async () => {
     if (!image) {
@@ -57,8 +53,7 @@ const EditProfileModal = ({
       setExist("Profile picture is required.");
       return;
     }
-    const imgUrl = await handleProfileUpload(image);
-    onSave(imgUrl);
+    onSave(image);
     onClose();
   };
 

@@ -18,7 +18,7 @@ import ProjectLandingPage from './pages/projectFlow/projectLandingPage/projectLa
 import TimeLinePage from './pages/projectFlow/timeLinePage/timeLinePage';
 import ProjectPage from './pages/projectFlow/projectPage/projectPage';
 import ProjectFinanceLanding from './pages/projectFlow/finance/projectFinanceLanding/projectFinanceLanding';
-import ServiceLanding from './pages/serviceFlow/serviveLandingPage/serviveLandingPage';
+import ServiceLanding from './pages/serviceFlow/serviceLandingPage/serviceLandingPage';
 import VolunteerDetailsPage from './pages/serviceFlow/volunteerDetailsPage/volunteerDetails';
 import Volunteering from './pages/serviceFlow/VolunteeringPage/VolunteeringPage';
 import ProjectPrPlan from './pages/projectFlow/prPlan/projectPrPlan';
@@ -32,6 +32,7 @@ import OuPage from './pages/otherFlow/ouPage/ouPage'
 import ProjectEventPage from './pages/projectFlow/event/projectEventPage';
 import UpcommingEventsPage from './pages/eventFlow/upcommingEventsPage';
 import Cookies from "js-cookie";
+import VolunteerActivitiesPage from './pages/serviceFlow/volunteerActivitiesPage/volunteerActivitiesPage';
 
 
 function App() {
@@ -85,6 +86,8 @@ function App() {
             <Route path='service'>
               <Route path='' element={<ServiceLanding />} />
               <Route path='volunteer' element={<VolunteerDetailsPage />} />
+              <Route path='activities/:id' element={<VolunteerActivitiesPage />} />
+              <Route path='activities' element={<VolunteerActivitiesPage />} />
               <Route path='volunteering' element={<Volunteering />} />
             </Route>
             <Route path='setting'>

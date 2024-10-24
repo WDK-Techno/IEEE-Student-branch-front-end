@@ -5,7 +5,7 @@ import CommonPagination from '../commonPagination/commonPagination';
 import AddTransectionModel from '../../models/addTransectionModel/addTransectionModel';
 
 
-const CommonFinanceTable = () => {
+const CommonFinanceTable = ({ transectionPermission }) => {
 
   const [selectedType, setSelectedType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
@@ -85,7 +85,7 @@ const CommonFinanceTable = () => {
     {
       label: "",
       value: "ACTION",
-      type: ["EDIT", "VIEW"]
+      type: transectionPermission ? ["EDIT", "VIEW"] : ["VIEW"]
     },
   ]
 
@@ -134,7 +134,7 @@ const CommonFinanceTable = () => {
           <div className='mt-4 d-flex justify-content-end'>
             <CommonPagination pages={10} currentPage={currentPage} setCurrentPage={setCurrentPage} />
           </div>
-          
+
         </div>
 
       </div>

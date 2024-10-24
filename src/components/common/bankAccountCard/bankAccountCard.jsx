@@ -5,7 +5,7 @@ import Spiral2 from '../../../assets/images/Spiral2.png'
 import Edit from '../../../assets/icons/editWhite.png'
 import View from '../../../assets/icons/viewWhite.png'
 
-const BankAccountCard = ({ editAction, ViewAction }) => {
+const BankAccountCard = ({ editAction, ViewAction, Account }) => {
 
     return (
         <>
@@ -16,23 +16,15 @@ const BankAccountCard = ({ editAction, ViewAction }) => {
                 </div>
 
                 <div className='d-flex justify-content-between align-items-center gap-2' style={{ marginTop: -30 }}>
-                    <div>
-                        <div className='text-white' style={{ fontSize: 10 }}>
-                            Current Balance
-                        </div>
-                        <div className='text-white'>
-                            <h4>LKR 500000.00</h4>
-                        </div>
-                    </div>
-                    <div className='d-flex gap-2'>
+                    <div className='d-flex gap-2 justify-content-end w-100'>
                         <div>
-                            <button onClick={editAction} className='border-0 bg-transparent'>
+                            <button onClick={() => { editAction(Account) }} className='border-0 bg-transparent'>
                                 <img style={{ width: 21, height: 17 }} src={Edit} />
                             </button>
 
                         </div>
                         <div>
-                            <button onClick={ViewAction} className='border-0 bg-transparent'>
+                            <button onClick={() => { ViewAction(Account) }} className='border-0 bg-transparent'>
                                 <img style={{ width: 21, height: 17 }} src={View} />
                             </button>
                         </div>
@@ -45,7 +37,7 @@ const BankAccountCard = ({ editAction, ViewAction }) => {
                         Account Number
                     </div>
                     <div className='text-white'>
-                        <h6>12222 22222 222222 2222</h6>
+                        <h6>{Account?.account_number}</h6>
                     </div>
                 </div>
 
@@ -55,15 +47,15 @@ const BankAccountCard = ({ editAction, ViewAction }) => {
                             Bank
                         </div>
                         <div className='text-white'>
-                            <h6>Bank of Ceylon</h6>
+                            <h6>{Account?.bank_name}</h6>
                         </div>
                     </div>
                     <div>
                         <div className='text-white text-end' style={{ fontSize: 10 }}>
-                            Account Number
+                            Branch
                         </div>
                         <div className='text-white text-end'>
-                            <h6>Badulla</h6>
+                            <h6>{Account?.branch}</h6>
                         </div>
                     </div>
                 </div>

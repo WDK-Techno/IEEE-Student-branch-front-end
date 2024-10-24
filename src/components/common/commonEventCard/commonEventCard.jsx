@@ -36,8 +36,7 @@ const CommonEventCard = ({ eventDetails, editable, editAction, viewAction }) => 
     const [viewEventModalShow, setViewEventModalShow] = useState(false);
     const [selectedEvent, setSelectedEvent] = useState(null); // State for selected event
     const [editEventModalShow, setEditEventModalShow] = useState(false);
-
-    console.log(eventDetails,"eventDetailseventDetailseventDetails")
+    const [isHovered, setIsHovered] = useState(false);
 
     const handleCloseViewEventModal = () => setViewEventModalShow(false);
     const handleCloseEditEventModal = () => setEditEventModalShow(false);
@@ -57,17 +56,21 @@ const CommonEventCard = ({ eventDetails, editable, editAction, viewAction }) => 
     };
 
     return (
-        <div className="card m-0 p-0 shadow-sm">
+        <div className="card m-0 p-0 shadow-sm"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
             <div className="card-header fw-bold text-light bg-dark">
                 {eventDetails.eventName}
             </div>
             <div className="card-body text-light d-flex flex-column position-relative bg-dark p-0">
                 <img
-                    src={eventDetails.image}
+                    src={eventDetails.image ? eventDetails.image : BgImage}
                     className="m-0 w-100"
-                    style={{ height: "220px", objectFit: "cover" }}
+                    style={{ height: "220px", width: "100%", objectFit: "cover" }}
                     alt="Event Background"
                 />
+                {isHovered && (
                 <div
                     className="position-absolute top-0 start-0 m-0 text-light px-2 py-1"
                     style={{ background: "rgba(0, 0, 0, 0.5)", height: "220px" }}
@@ -99,6 +102,7 @@ const CommonEventCard = ({ eventDetails, editable, editAction, viewAction }) => 
                         </button>
                     </div> */}
                 </div>
+                )}
             </div>
             <div className="card-footer d-flex">
                 <div className="fw-bold">{eventDetails.projectName}</div>

@@ -111,7 +111,7 @@ const ProjectPage = () => {
         setMyroles(res?.data?.data?.my_user_role_details);
         setOtherRoles(res?.data?.data?.other_role_details);
         const allrole = [
-          ...res?.data?.data?.my_user_role_details,
+          // ...res?.data?.data?.my_user_role_details,
           ...res?.data?.data?.other_role_details,
         ];
         setAllRoles(allrole);
@@ -342,10 +342,10 @@ const ProjectPage = () => {
           </div>
 
           <div className="row mt-4">
-            <div className="col-lg-8 p-3">
+            <div className="col-lg-7 p-3">
               <CommonNotesArea show={true} projectID={id} project={true} />
             </div>
-            <div className="col-lg-4 p-3">
+            <div className="col-lg-5 p-3">
               <div className="d-flex bg-white common-shadow flex-column p-3 rounded-3">
                 <div>
                   <h6 className="text-third fw-bold">Project Created By</h6>

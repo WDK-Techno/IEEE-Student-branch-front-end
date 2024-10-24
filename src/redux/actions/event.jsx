@@ -66,3 +66,18 @@ export const updatEvent = (projectId, eventId, body, callback) => {
     }
   };
 };
+
+export const createEvent = (projectId, body, callback) => {
+  return async (dispatch) => {
+    const endpoint = `${import.meta.env.VITE_API_HOST}event/${projectId}`;
+    console.log("endpoint", endpoint)
+    console.log("body:", body)
+
+    try {
+      const response = await http.post(endpoint, body);
+      callback(response);
+    } catch (error) {
+      callback(error.response);
+    }
+  };
+};

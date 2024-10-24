@@ -276,9 +276,8 @@ const ProjectModel = ({
                     item?.ouName && (
                       <div className="form-check" key={item.ouID}>
                         <input
-                          className={`form-check-input ${
-                            error.ou_id ? "is-invalid" : ""
-                          }`}
+                          className={`form-check-input ${error.ou_id ? "is-invalid" : ""
+                            }`}
                           type="checkbox"
                           id={item.ouID}
                           name="ouID"
@@ -315,9 +314,8 @@ const ProjectModel = ({
                   name="project_name"
                   value={formData.project_name}
                   onChange={handleInputChange}
-                  className={`form-select ${
-                    error.project_name ? "is-invalid" : ""
-                  }`}
+                  className={`form-select ${error.project_name ? "is-invalid" : ""
+                    }`}
                   disabled={disabled}
                 />
                 <div className="invalid-feedback">This field is required.</div>
@@ -337,9 +335,8 @@ const ProjectModel = ({
                   min={new Date().toISOString().split('T')[0]}
                   value={formData.start_date}
                   onChange={handleInputChange}
-                  className={`form-select ${
-                    error.start_date ? "is-invalid" : ""
-                  }`}
+                  className={`form-select ${error.start_date ? "is-invalid" : ""
+                    }`}
                   id="exampleFormControlInput1"
                   placeholder="account number"
                   disabled={disabled}
@@ -361,9 +358,8 @@ const ProjectModel = ({
                   name="end_date"
                   value={formData.end_date}
                   onChange={handleInputChange}
-                  className={`form-select ${
-                    error.end_date ? "is-invalid" : ""
-                  }`}
+                  className={`form-select ${error.end_date ? "is-invalid" : ""
+                    }`}
                   id="exampleFormControlInput1"
                   placeholder="amount"
                   disabled={disabled}
@@ -378,9 +374,8 @@ const ProjectModel = ({
                   name="description"
                   value={formData.description}
                   onChange={handleInputChange}
-                  className={`form-select ${
-                    error.description ? "is-invalid" : ""
-                  }`}
+                  className={`form-select ${error.description ? "is-invalid" : ""
+                    }`}
                   id="exampleFormControlTextarea1"
                   rows="3"
                   disabled={disabled}
